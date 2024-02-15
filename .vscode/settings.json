@@ -1,0 +1,10 @@
+{
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.find.cursorMoveOnType": false,
+    "editor.find.addExtraSpaceOnTop": false,
+    "editor.defaultFormatter": "GitHub.copilot",
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    }
+}
