@@ -1,20 +1,14 @@
-# Use the official Node.js 14 image as a parent image
-FROM node:14
+# Use an Nginx image to serve static content
+FROM nginx:alpine
 
-# Set the working directory in your Docker image
-WORKDIR /usr/src/app
+# Set the working directory to nginx asset directory
+WORKDIR /usr/share/nginx/html
 
-# Copy the package.json and package-lock.json files from your project into the filesystem of the container
-COPY package*.json ./
+# Remove default nginx static assets
+RUN rm -rf ./*
 
-# Install any dependencies
-RUN npm install
-
-# Copy the rest of your application's code into the container
+# Copy static assets over
 COPY . .
 
-# Inform Docker that the container listens on the specified network ports at runtime
-EXPOSE 8080
-
-# Define the command to run your app (this example assumes "npm start" is specified in your package.json)
-CMD ["npm", "start"]
+# Containers run nginx with global directives and daemon off
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
